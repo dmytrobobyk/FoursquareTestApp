@@ -1,0 +1,13 @@
+ext {
+    okhttpVersion = '3.10.0'
+    retrofitVersion = '2.4.0'
+    gsonVersion = '2.8.2'
+    rxAndroidVersion = '2.1.0'
+    rxJavaVersion = '2.1.14'
+    daggerVersion = '2.20'
+    glideVersion = '4.8.0'
+    lifeCycleVersion = '1.1.1'
+    googleMapsVersion = '18.0.1'
+    androidMapsUtilVersion = '0.4+'
+
+}
