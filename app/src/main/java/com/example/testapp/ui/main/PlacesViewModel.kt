@@ -3,7 +3,6 @@ package com.example.testapp.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.testapp.models.Result
 import com.example.testapp.common.viewmodel.base.BaseViewModel
 import com.example.testapp.ui.details.models.PlaceDetailsInfo
 import com.example.testapp.ui.main.repository.PlacesRepository
@@ -11,6 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.processors.PublishProcessor
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 class PlacesViewModel(private val repository: PlacesRepository) : BaseViewModel() {
@@ -19,9 +19,6 @@ class PlacesViewModel(private val repository: PlacesRepository) : BaseViewModel(
     private val requestProcessor: PublishProcessor<String> = PublishProcessor.create()
     private lateinit var debounceDisposable: Disposable
     private val SEARCH_DURATION = 200L
-
-//    private val _placesList = MediatorLiveData<List<Result>>()
-//    val placesList: MutableLiveData<List<Result>> get() = _placesList
 
     private val _placesList = MediatorLiveData<List<PlaceDetailsInfo>>()
     val placesList: MutableLiveData<List<PlaceDetailsInfo>> get() = _placesList
@@ -65,6 +62,27 @@ class PlacesViewModel(private val repository: PlacesRepository) : BaseViewModel(
             _placeholderVisibility.postValue(true)
         } else {
             requestProcessor.onNext(text.toString())
+        }
+    }
+
+    fun addFavoritePlace(place: PlaceDetailsInfo) {
+        place.name?.let {
+            addSubscription(
+                repository.addFavoritePlace(it)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        val list = ArrayList(_placesList.value)
+                        list.forEach {
+                            if(it.name == place.name) {
+                                it.isFavorite = !it.isFavorite
+                            }
+                        }
+                        _placesList.postValue(list)
+                    }, {
+                        it.printStackTrace()
+                    })
+            )
         }
     }
 }

@@ -28,8 +28,8 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
 
         intent.extras?.let {
-            placesArrayList =
-                it.getParcelableArrayList<PlaceDetailsInfo>(PLACES_DETAILS_ITEM_LIST_KEY) as ArrayList<PlaceDetailsInfo>
+//            placesArrayList =
+//                it.getParcelableArrayList<PlaceDetailsInfo>(PLACES_DETAILS_ITEM_LIST_KEY) as ArrayList<PlaceDetailsInfo>
         }
 
         binding = ActivityMapBinding.inflate(layoutInflater)
@@ -62,7 +62,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
             val intent = Intent(this, PlaceMapActivityDetails::class.java)
             placesArrayList.forEach {
                 if (marker.title == it.name) {
-                    intent.putExtra(PLACE_DETAILS_INFO_KEY, it)
+//                    intent.putExtra(PLACE_DETAILS_INFO_KEY, it)
                 }
             }
             startActivity(intent)
