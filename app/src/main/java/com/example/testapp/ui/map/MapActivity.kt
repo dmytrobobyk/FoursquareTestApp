@@ -1,9 +1,12 @@
 package com.example.testapp.ui.map
 
+import android.content.Intent
 import android.os.Bundle
 import com.example.testapp.R
 import com.example.testapp.common.BaseActivity
 import com.example.testapp.databinding.ActivityMapBinding
+import com.example.testapp.ui.details.PlaceMapDetailsActivity
+import com.example.testapp.ui.details.PlaceMapDetailsActivity.Companion.PLACE_DETAILS_INFO_KEY
 import com.example.testapp.ui.details.models.PlaceDetailsInfo
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -11,10 +14,6 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-
-import android.content.Intent
-import com.example.testapp.ui.details.PlaceMapActivityDetails
-import com.example.testapp.ui.details.PlaceMapActivityDetails.Companion.PLACE_DETAILS_INFO_KEY
 
 
 class MapActivity : BaseActivity(), OnMapReadyCallback {
@@ -28,8 +27,8 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
 
         intent.extras?.let {
-//            placesArrayList =
-//                it.getParcelableArrayList<PlaceDetailsInfo>(PLACES_DETAILS_ITEM_LIST_KEY) as ArrayList<PlaceDetailsInfo>
+            placesArrayList =
+                it.getParcelableArrayList<PlaceDetailsInfo>(PLACES_DETAILS_ITEM_LIST_KEY) as ArrayList<PlaceDetailsInfo>
         }
 
         binding = ActivityMapBinding.inflate(layoutInflater)
@@ -59,10 +58,10 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
         )
 
         googleMap.setOnInfoWindowClickListener { marker ->
-            val intent = Intent(this, PlaceMapActivityDetails::class.java)
+            val intent = Intent(this, PlaceMapDetailsActivity::class.java)
             placesArrayList.forEach {
                 if (marker.title == it.name) {
-//                    intent.putExtra(PLACE_DETAILS_INFO_KEY, it)
+                    intent.putExtra(PLACE_DETAILS_INFO_KEY, it)
                 }
             }
             startActivity(intent)

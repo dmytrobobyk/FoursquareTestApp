@@ -12,9 +12,8 @@ import com.example.testapp.common.BaseFragment
 import com.example.testapp.common.viewmodel.base.ViewModelFactory
 import com.example.testapp.databinding.FragmentMainBinding
 import com.example.testapp.ui.MainActivity
-import com.example.testapp.ui.details.PlaceMapActivityDetails
-import com.example.testapp.ui.details.PlaceMapActivityDetails.Companion.PLACE_DETAILS_INFO_KEY
-import com.example.testapp.ui.details.PlaceMapActivityDetails.Companion.PLACE_DETAILS_NAME_KEY
+import com.example.testapp.ui.details.PlaceMapDetailsActivity
+import com.example.testapp.ui.details.PlaceMapDetailsActivity.Companion.PLACE_DETAILS_INFO_KEY
 import com.example.testapp.ui.details.models.PlaceDetailsInfo
 import com.example.testapp.ui.main.PlacesViewModel
 import com.example.testapp.ui.main.adapter.PlacesAdapter
@@ -76,9 +75,8 @@ class PlacesFragment : BaseFragment() {
 
         if (!::adapter.isInitialized) {
             adapter = PlacesAdapter({
-                val intent = Intent(requireActivity(), PlaceMapActivityDetails::class.java)
-//                intent.putExtra(PLACE_DETAILS_INFO_KEY, it)
-                intent.putExtra(PLACE_DETAILS_NAME_KEY, it.name)
+                val intent = Intent(requireActivity(), PlaceMapDetailsActivity::class.java)
+                intent.putExtra(PLACE_DETAILS_INFO_KEY, it)
                 startActivity(intent)
             }, {
                 viewModel.addFavoritePlace(it)

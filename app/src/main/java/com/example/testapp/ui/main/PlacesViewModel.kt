@@ -72,8 +72,9 @@ class PlacesViewModel(private val repository: PlacesRepository) : BaseViewModel(
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
-                        val list = ArrayList(_placesList.value)
-                        list.forEach {
+                        //deep copy for updating the list calling submitList in fragment
+                        val list = _placesList.value?.map { it.copy() }
+                        list?.forEach {
                             if(it.name == place.name) {
                                 it.isFavorite = !it.isFavorite
                             }

@@ -4,6 +4,7 @@ import com.example.testapp.common.storage.PreferenceStorage
 import com.example.testapp.common.util.getDistanceToSeattle
 import com.example.testapp.common.util.getImageUrl
 import com.example.testapp.common.util.getPlaceCategory
+import com.example.testapp.common.util.isItemFavorite
 import com.example.testapp.ui.details.models.PlaceDetailsInfo
 import com.example.testapp.ui.main.rest.PlacesApi
 import io.reactivex.Completable
@@ -30,7 +31,7 @@ class PlacesLocalRepository(private val api: PlacesApi, private val preferenceSt
                             it.location.postcode,
                             it.location.region,
                             getImageUrl(it.categories),
-                            isItemFavorite(it.name)
+                            isItemFavorite(it.name, preferenceStorage.getFavoritePlaces())
                         )
                     }.toList()
             }
@@ -40,15 +41,5 @@ class PlacesLocalRepository(private val api: PlacesApi, private val preferenceSt
         return Completable.fromAction {
             preferenceStorage.saveFavoritePlace(placeName)
         }
-    }
-
-    private fun isItemFavorite(itemName : String): Boolean {
-        val favorites = preferenceStorage.getFavoritePlaces()
-        favorites.forEach {
-            if (it == itemName) {
-                return true
-            }
-        }
-        return false
     }
 }

@@ -39,7 +39,7 @@ class MainActivity : BaseActivity(), PlacesFragment.ReceivePlacesInterface {
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener {
             val intent = Intent(this, MapActivity::class.java)
-//            intent.putParcelableArrayListExtra(PLACES_DETAILS_ITEM_LIST_KEY, placesArrayList)
+            intent.putParcelableArrayListExtra(PLACES_DETAILS_ITEM_LIST_KEY, placesArrayList)
             startActivity(intent)
         }
     }
