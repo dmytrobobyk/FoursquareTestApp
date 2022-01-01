@@ -8,12 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.testapp.BuildConfig
 import com.example.testapp.common.BaseFragment
-import com.example.testapp.common.util.getDistanceBetweenTwoPoints
 import com.example.testapp.common.viewmodel.base.ViewModelFactory
 import com.example.testapp.databinding.FragmentMainBinding
-import com.example.testapp.models.Result
 import com.example.testapp.ui.MainActivity
 import com.example.testapp.ui.details.PlaceMapActivityDetails
 import com.example.testapp.ui.details.PlaceMapActivityDetails.Companion.PLACE_DETAILS_INFO_KEY
@@ -22,7 +19,6 @@ import com.example.testapp.ui.main.PlacesViewModel
 import com.example.testapp.ui.main.adapter.PlacesAdapter
 import com.example.testapp.ui.main.di.DaggerPlacesFragmentComponent
 import com.example.testapp.ui.main.di.PlacesFragmentModule
-import com.google.android.gms.maps.model.LatLng
 import javax.inject.Inject
 
 class PlacesFragment : BaseFragment() {
@@ -40,7 +36,7 @@ class PlacesFragment : BaseFragment() {
     }
 
     interface ReceivePlacesInterface {
-        fun onPlacesReceived(places: List<Result>)
+        fun onPlacesReceived(places: List<PlaceDetailsInfo>)
     }
 
     private val component by lazy {
@@ -80,28 +76,8 @@ class PlacesFragment : BaseFragment() {
         if (!::adapter.isInitialized) {
             adapter = PlacesAdapter {
                 run {
-                    val centerOfSeattle = LatLng(BuildConfig.SEATTLE_LATTITUDE.toDouble(), BuildConfig.SEATTLE_LONGITUDE.toDouble())
-                    val selectedPoint = LatLng(it.geocodes.main.latitude, it.geocodes.main.longitude)
-                    val distanceTitle = "To Seattle center is ${getDistanceBetweenTwoPoints(selectedPoint, centerOfSeattle)} km"
-                    val category = if(it.categories.isEmpty()) {
-                        "No category"
-                    } else {
-                        it.categories[0].name
-                    }
-                    val placeDetailsInfo = PlaceDetailsInfo(
-                        it.name,
-                        distanceTitle,
-                        category,
-                        it.fsq_id,
-                        it.geocodes.main.latitude,
-                        it.geocodes.main.longitude,
-                        it.location.address,
-                        it.location.country,
-                        it.location.postcode,
-                        it.location.region
-                    )
                     val intent = Intent(requireActivity(), PlaceMapActivityDetails::class.java)
-                    intent.putExtra(PLACE_DETAILS_INFO_KEY, placeDetailsInfo)
+                    intent.putExtra(PLACE_DETAILS_INFO_KEY, it)
                     startActivity(intent)
                 }
             }
@@ -114,5 +90,4 @@ class PlacesFragment : BaseFragment() {
             receivePlacesInterface.onPlacesReceived(it)
         })
     }
-
 }

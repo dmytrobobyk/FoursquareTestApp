@@ -14,6 +14,7 @@ data class PlaceDetailsInfo(
     val country: String?,
     val postcode: String?,
     val region: String?,
+    val imageUrl: String?
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
@@ -27,6 +28,7 @@ data class PlaceDetailsInfo(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readString()
     )
 
     override fun describeContents(): Int {
@@ -44,6 +46,7 @@ data class PlaceDetailsInfo(
         parcel.writeString(country)
         parcel.writeString(postcode)
         parcel.writeString(region)
+        parcel.writeString(imageUrl)
     }
 
     companion object CREATOR : Parcelable.Creator<PlaceDetailsInfo> {

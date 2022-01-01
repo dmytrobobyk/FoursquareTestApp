@@ -20,8 +20,11 @@ class PlacesViewModel(private val repository: PlacesRepository) : BaseViewModel(
     private lateinit var debounceDisposable: Disposable
     private val SEARCH_DURATION = 200L
 
-    private val _placesList = MediatorLiveData<List<Result>>()
-    val placesList: MutableLiveData<List<Result>> get() = _placesList
+//    private val _placesList = MediatorLiveData<List<Result>>()
+//    val placesList: MutableLiveData<List<Result>> get() = _placesList
+
+    private val _placesList = MediatorLiveData<List<PlaceDetailsInfo>>()
+    val placesList: MutableLiveData<List<PlaceDetailsInfo>> get() = _placesList
 
     private val _isLoading = MediatorLiveData<Boolean>().apply { value = false }
     val isLoading: LiveData<Boolean> get() = _isLoading

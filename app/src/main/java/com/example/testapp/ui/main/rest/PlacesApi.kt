@@ -4,7 +4,6 @@ import com.example.testapp.BuildConfig
 import com.example.testapp.models.SearchResponse
 import io.reactivex.Single
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.Query
 
 interface PlacesApi {

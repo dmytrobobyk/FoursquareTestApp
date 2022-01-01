@@ -1,6 +1,7 @@
 package com.example.testapp.common.util
 
 import android.util.Log
+import com.example.testapp.BuildConfig
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.SphericalUtil
 import java.text.DecimalFormat
@@ -35,4 +36,10 @@ fun calculationByDistance(StartP: LatLng, EndP: LatLng): Double {
 fun getDistanceBetweenTwoPoints(firstPoint: LatLng, secondPoint: LatLng): Double {
     val distanceInKm = SphericalUtil.computeDistanceBetween(firstPoint, secondPoint) / 1000
     return String.format("%.1f", distanceInKm).toDouble()
+}
+
+fun getDistanceToSeattle(latitude: Double, longitude: Double): String {
+    val centerOfSeattle = LatLng(BuildConfig.SEATTLE_LATTITUDE.toDouble(), BuildConfig.SEATTLE_LONGITUDE.toDouble())
+    val selectedPoint = LatLng(latitude, longitude)
+    return "To Seattle center is ${getDistanceBetweenTwoPoints(selectedPoint, centerOfSeattle)} km"
 }

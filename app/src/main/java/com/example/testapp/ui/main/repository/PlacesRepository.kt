@@ -6,5 +6,5 @@ import com.example.testapp.ui.details.models.PlaceDetailsInfo
 
 
 interface PlacesRepository {
-    fun searchPlaces(query: String): Single<List<Result>>
+    fun searchPlaces(query: String): Single<List<PlaceDetailsInfo>>
 }
