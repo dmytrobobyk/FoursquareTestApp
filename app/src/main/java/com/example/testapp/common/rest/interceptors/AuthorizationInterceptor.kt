@@ -8,7 +8,7 @@ import okhttp3.Response
 class AuthorizationInterceptor(val context: Context) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain?): Response? {
-        chain?.request()?.header("Authorization: ${BuildConfig.API_KEY}")
-        return chain?.proceed(chain.request().newBuilder().build())
+        val request = chain?.request()?.newBuilder()?.addHeader("Authorization", BuildConfig.API_KEY)?.build()
+        return chain?.proceed(request)
     }
 }

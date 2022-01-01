@@ -9,7 +9,6 @@ import retrofit2.http.Query
 
 interface PlacesApi {
 
-    @Headers("Authorization: fsq3zpx+htusk9C2OFI5PyndHcrqLeRvf1JfmrphsbqmNnU=")
     @GET("search")
     fun searchPlaces(
         @Query("client_id") clientId: String = BuildConfig.CLIENT_ID,
