@@ -28,7 +28,8 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
 
         intent.extras?.let {
-            placesArrayList = it.getParcelableArrayList<PlaceDetailsInfo>(PLACES_DETAILS_ITEM_LIST_KEY) as ArrayList<PlaceDetailsInfo>
+            placesArrayList =
+                it.getParcelableArrayList<PlaceDetailsInfo>(PLACES_DETAILS_ITEM_LIST_KEY) as ArrayList<PlaceDetailsInfo>
         }
 
         binding = ActivityMapBinding.inflate(layoutInflater)
@@ -48,16 +49,23 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
                 MarkerOptions().position(LatLng(it.latitude, it.longitude)).title(it.name)
             )
         }
-        map.moveCamera(CameraUpdateFactory.newLatLng(LatLng(placesArrayList.last().latitude, placesArrayList.last().longitude)))
+        map.moveCamera(
+            CameraUpdateFactory.newLatLng(
+                LatLng(
+                    placesArrayList.last().latitude,
+                    placesArrayList.last().longitude
+                )
+            )
+        )
 
         googleMap.setOnInfoWindowClickListener { marker ->
+            val intent = Intent(this, PlaceMapActivityDetails::class.java)
             placesArrayList.forEach {
                 if (marker.title == it.name) {
-                    val intent = Intent(this, PlaceMapActivityDetails::class.java)
                     intent.putExtra(PLACE_DETAILS_INFO_KEY, it)
-                    startActivity(intent)
                 }
             }
+            startActivity(intent)
         }
     }
 

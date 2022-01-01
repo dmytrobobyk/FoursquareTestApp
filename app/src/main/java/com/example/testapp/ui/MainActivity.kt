@@ -45,6 +45,7 @@ class MainActivity : BaseActivity(), PlacesFragment.ReceivePlacesInterface {
     }
 
     override fun onPlacesReceived(places: List<PlaceDetailsInfo>) {
+        placesArrayList.clear()
         placesArrayList.addAll(places)
     }
 }
