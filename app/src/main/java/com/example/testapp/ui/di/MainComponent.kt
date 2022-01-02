@@ -1,6 +1,7 @@
 package com.example.testapp.ui.di
 
 import android.content.Context
+import com.example.testapp.common.storage.PreferenceStorage
 import com.example.testapp.di.AppComponent
 import com.example.testapp.di.annotations.ActivityScope
 import com.example.testapp.ui.MainActivity
@@ -15,6 +16,8 @@ interface MainComponent {
     fun context(): Context
 
     fun activity(): MainActivity
+
+    fun localStorage(): PreferenceStorage
 
     @Component.Builder
     interface Builder {

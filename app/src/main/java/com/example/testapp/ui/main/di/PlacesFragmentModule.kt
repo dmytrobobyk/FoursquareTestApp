@@ -2,6 +2,7 @@ package com.example.testapp.ui.main.di
 
 import android.content.Context
 import com.example.testapp.common.rest.createService
+import com.example.testapp.common.storage.PreferenceStorage
 import com.example.testapp.di.annotations.FragmentScope
 import com.example.testapp.ui.main.PlacesViewModel
 import com.example.testapp.ui.main.repository.PlacesLocalRepository
@@ -19,7 +20,7 @@ class PlacesFragmentModule {
 
     @Provides
     @FragmentScope
-    fun repository(api: PlacesApi): PlacesRepository = PlacesLocalRepository(api)
+    fun repository(api: PlacesApi, preferenceStorage: PreferenceStorage): PlacesRepository = PlacesLocalRepository(api, preferenceStorage)
 
     @Provides
     @FragmentScope

@@ -15,11 +15,9 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.maps.android.SphericalUtil
-import java.lang.reflect.Field
 
 
-class PlaceMapActivityDetails : BaseActivity(), OnMapReadyCallback {
+class PlaceMapDetailsActivity : BaseActivity(), OnMapReadyCallback {
 
 
     private lateinit var mMap: GoogleMap
@@ -84,7 +82,6 @@ class PlaceMapActivityDetails : BaseActivity(), OnMapReadyCallback {
 
     companion object {
         public final val PLACE_DETAILS_INFO_KEY = "Place_details_info_key"
-
     }
 
 }

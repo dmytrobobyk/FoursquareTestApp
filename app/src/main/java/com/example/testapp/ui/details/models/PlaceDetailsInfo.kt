@@ -14,8 +14,10 @@ data class PlaceDetailsInfo(
     val country: String?,
     val postcode: String?,
     val region: String?,
-    val imageUrl: String?
-) : Parcelable {
+    val imageUrl: String?,
+    var isFavorite: Boolean = false
+)
+    : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -28,7 +30,8 @@ data class PlaceDetailsInfo(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString()
+        parcel.readString(),
+        parcel.readValue(Boolean::class.java.classLoader) as? Boolean? ?: false
     )
 
     override fun describeContents(): Int {
@@ -47,6 +50,7 @@ data class PlaceDetailsInfo(
         parcel.writeString(postcode)
         parcel.writeString(region)
         parcel.writeString(imageUrl)
+        parcel.writeValue(isFavorite)
     }
 
     companion object CREATOR : Parcelable.Creator<PlaceDetailsInfo> {
@@ -58,5 +62,4 @@ data class PlaceDetailsInfo(
             return arrayOfNulls(size)
         }
     }
-
 }

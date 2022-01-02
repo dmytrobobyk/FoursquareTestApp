@@ -23,3 +23,12 @@ fun getImageUrl(categories: List<Category>): String {
         "${categories[0].icon.prefix}${IMAGE_SIZE_BIG}${categories[0].icon.suffix}"
     }
 }
+
+fun isItemFavorite(itemName : String, favorites: Set<String>): Boolean {
+    favorites.forEach {
+        if (it == itemName) {
+            return true
+        }
+    }
+    return false
+}

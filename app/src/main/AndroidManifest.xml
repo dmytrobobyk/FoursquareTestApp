@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.details.PlaceMapActivityDetails" />
+        <activity android:name=".ui.details.PlaceMapDetailsActivity" />
         <activity android:name=".ui.map.MapActivity" />
     </application>
 
