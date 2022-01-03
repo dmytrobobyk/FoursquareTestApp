@@ -6,6 +6,7 @@
     <string name="search_placeholder">Start typing in a search bar to find a place</string>
     <string name="category_is">Category: %1$s</string>
     <string name="distance_from_the_center_of_seattle">To Seattle center: %1$s</string>
+    <string name="please_enter_some_place_name">Please, enter some place name</string>
 
     <string name="google_maps_key">AIzaSyDTVnwTm3gQSVFeTcXr60odkH9ZKeSLhds</string>
 

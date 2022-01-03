@@ -2,10 +2,12 @@ package com.example.testapp.ui.details
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.annotation.NonNull
 import com.example.testapp.BuildConfig
 import com.example.testapp.R
 import com.example.testapp.common.BaseActivity
 import com.example.testapp.common.util.getDistanceBetweenTwoPoints
+import com.example.testapp.common.util.getDistanceToSeattle
 import com.example.testapp.databinding.ActivityPlaceMapDetailsBinding
 import com.example.testapp.ui.details.adapter.PlaceDetailsRecyclerViewAdapter
 import com.example.testapp.ui.details.models.PlaceDetailsInfo
@@ -15,6 +17,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.appbar.AppBarLayout
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.google.android.material.appbar.AppBarLayout.Behavior.DragCallback
 
 
 class PlaceMapDetailsActivity : BaseActivity(), OnMapReadyCallback {
@@ -58,9 +64,7 @@ class PlaceMapDetailsActivity : BaseActivity(), OnMapReadyCallback {
         mMap.addMarker(MarkerOptions().position(centerOfSeattle).anchor(0.5f, 0.5f).title("Center of Seattle"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(selectedPoint))
 
-        val distanceTitle = "To Seattle center is ${getDistanceBetweenTwoPoints(selectedPoint, centerOfSeattle)} km"
-        showDistanceBetweenPoints(distanceTitle)
-
+        showDistanceBetweenPoints(getDistanceToSeattle(selectedPoint.latitude, selectedPoint.longitude))
     }
 
     private fun showDistanceBetweenPoints(distance: String) {

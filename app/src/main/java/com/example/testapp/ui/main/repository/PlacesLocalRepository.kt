@@ -23,7 +23,7 @@ class PlacesLocalRepository(private val api: PlacesApi, private val preferenceSt
                             it.name,
                             getDistanceToSeattle(it.geocodes.main.latitude, it.geocodes.main.longitude),
                             getPlaceCategory(it.categories),
-                            it.fsq_id,
+                            it.fsqId,
                             it.geocodes.main.latitude,
                             it.geocodes.main.longitude,
                             it.location.address,

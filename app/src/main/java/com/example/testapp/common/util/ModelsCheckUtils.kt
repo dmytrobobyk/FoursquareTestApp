@@ -9,7 +9,7 @@ private val IMAGE_SIZE_SMALL = 32
 
 
 fun getPlaceCategory(categories: List<Category>): String {
-    return if(categories.isEmpty()) {
+    return if (categories.isEmpty()) {
         "No category"
     } else {
         categories[0].name
@@ -17,18 +17,11 @@ fun getPlaceCategory(categories: List<Category>): String {
 }
 
 fun getImageUrl(categories: List<Category>): String {
-    return if(categories.isEmpty()) {
-        ""
-    } else {
-        "${categories[0].icon.prefix}${IMAGE_SIZE_BIG}${categories[0].icon.suffix}"
-    }
+    return "${categories.firstOrNull()?.icon?.prefix}$IMAGE_SIZE_BIG${categories.firstOrNull()?.icon?.suffix}"
 }
 
-fun isItemFavorite(itemName : String, favorites: Set<String>): Boolean {
-    favorites.forEach {
-        if (it == itemName) {
-            return true
-        }
+fun isItemFavorite(itemName: String, favorites: Set<String>): Boolean {
+    return favorites.any {
+        it == itemName
     }
-    return false
 }

@@ -1,8 +1,10 @@
 package com.example.testapp.models
 
+import com.google.gson.annotations.SerializedName
+
 data class Location(
     val address: String,
-    val address_extended: String,
+    @SerializedName("address_extended")val addressExtended: String,
     val country: String,
     val cross_street: String,
     val dma: String,

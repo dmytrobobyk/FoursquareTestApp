@@ -1,5 +1,7 @@
 package com.example.testapp.models
 
+import com.google.gson.annotations.SerializedName
+
 data class Context(
-    val geo_bounds: GeoBounds
+    @SerializedName("geo_bounds")val geoBounds: GeoBounds
 )

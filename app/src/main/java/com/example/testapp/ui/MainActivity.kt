@@ -2,6 +2,7 @@ package com.example.testapp.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import com.example.testapp.App
 import com.example.testapp.R
 import com.example.testapp.common.BaseActivity
@@ -38,9 +39,13 @@ class MainActivity : BaseActivity(), PlacesFragment.ReceivePlacesInterface {
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener {
-            val intent = Intent(this, MapActivity::class.java)
-            intent.putParcelableArrayListExtra(PLACES_DETAILS_ITEM_LIST_KEY, placesArrayList)
-            startActivity(intent)
+            if (placesArrayList.isNotEmpty()) {
+                val intent = Intent(this, MapActivity::class.java)
+                intent.putParcelableArrayListExtra(PLACES_DETAILS_ITEM_LIST_KEY, placesArrayList)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, getString(R.string.please_enter_some_place_name), Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

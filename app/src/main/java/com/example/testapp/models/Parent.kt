@@ -1,6 +1,8 @@
 package com.example.testapp.models
 
+import com.google.gson.annotations.SerializedName
+
 data class Parent(
-    val fsq_id: String,
+    @SerializedName("fsq_id")val fsqId: String,
     val name: String
 )
